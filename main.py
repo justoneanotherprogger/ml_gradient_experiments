@@ -1,3 +1,4 @@
+from random import randint
 import pandas as pd
 from sympy import Matrix, Symbol
 from gradient import get_gradient_vector, gradient_downside
@@ -18,12 +19,12 @@ def ml_studying(list_of_data_lists, list_of_results):
     print(f"Result {tuple(result.T.tolist()[0])} MSE =", final_mse_value)
 
     final_result = (result.T * list_of_weights)[0]
-    print(final_result.subs(get_dict_from_vectors(list_of_weights, (1, 2))))
+    # print(final_result.subs(get_dict_from_vectors(list_of_weights, (1, 2))))
     return final_result
 
 
-dataset = pd.DataFrame([[1, 2, 10], [3, 4, 15], [5, 6, 20], [7, 8, 25]], columns=['number1', 'number2', 'target'])
-# print(dataset)
+dataset = pd.DataFrame([[randint(-100, 100) for _ in range(3)] for _ in range(10)], columns=['number1', 'number2', 'target'])
+print(dataset)
 
 result_function = ml_studying(dataset.drop(columns='target'), dataset['target'])
 print(result_function)
